@@ -21,6 +21,11 @@ export default function Game(){
     },[])
     
     const deal = () => {
+        if (!dealer.length){
+            dealDeal()
+            return;
+        }
+ 
         //Removes card from deck and sets player card deck + value
         setPlayer(player.concat(deck.slice(0,1)))
         countPlayer(deck.slice(0,1)[0].value)
@@ -28,7 +33,8 @@ export default function Game(){
         
         //Game logic?
         if (playerValue > 21 && hasAce === false){
-            alert("You lost")
+            alert("You lost :(")
+            reset()
             return;
         }
         if (playerValue > 21 && hasAce === true){
@@ -36,27 +42,34 @@ export default function Game(){
             setAce(false)
             return;
         }
-        console.log(playerValue) 
+    }
 
+    const dealDeal = () => {
+        setDealer(dealer.concat(deck.slice(0,2)))
+        countDealer(deck.slice(0,1)[0].value)
+        countDealer(deck.slice(1,2)[0].value)
+        setDeck(deck.slice(2,deck.length))
+        //add another card
+        
     }
 
     const play = () => {
         if (dealerValue > 21){
             alert("You won!")
+            reset()
             return;
         }
         if (dealerValue >= playerValue){
-            alert("You lost")
-            return;
+            alert("You lost :(")
+            reset()
         }
         else{
             alert("You won!")
-        }
-        
+            reset()
+        }        
     }
 
     const countPlayer = (e) => {
-        console.log(e)
         if (e === "KING" || e === "QUEEN" || e === "JACK"){
             setPlayerValue(playerValue + 10)
             return;
@@ -70,7 +83,6 @@ export default function Game(){
     }
 
     const countDealer = (e) => {
-        console.log(e)
         if (e === "KING" || e === "QUEEN" || e === "JACk"){
             setDealerValue(playerValue + 10)
             return;
@@ -87,17 +99,21 @@ export default function Game(){
 
 
     const bet = () => {
-        //Find a better place to put this
-        if (!dealer.length){
-            setDealer(deck.slice(0,1))
-            countDealer(deck.slice(0,1)[0].value)
-            setDeck(deck.slice(1,deck.length))
-        }
         if (balance < 100){
             return;
         }
         setBet(playerBet+100)
         setBalance(balance-100)
+    }
+
+    const reset = () => {
+        setAce(false)
+        setBet(0)
+        setDealer([])
+        setDealerAce(false)
+        setDealerValue(0)
+        setPlayer([])
+        setPlayerValue(0)
     }
 
     return(

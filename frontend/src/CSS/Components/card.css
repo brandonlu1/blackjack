@@ -1,4 +1,12 @@
 .card--container{
     height:300px;
     width:214px;
+
+    user-select: none;
+}
+
+.card--container:hover{
+    height:315px;
+    width:224.7px;
+    transition-duration: .05s;
 }
