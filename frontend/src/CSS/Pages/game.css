@@ -1,0 +1,6 @@
+.game--cards{
+    display:flex;
+    justify-content:space-evenly;
+    flex-wrap: wrap;
+    min-height:315px;
+}
