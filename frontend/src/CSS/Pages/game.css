@@ -1,15 +1,6 @@
-.game--container{
-    display:flex;
-    flex-direction: column;
-    width:100vw;
-    min-height:100vh;
-    align-items: center;
-
-    background-color: #4E6A54;
-}
-
 .game--cards{
     display:flex;
     justify-content:space-evenly;
     flex-wrap: wrap;
+    min-height:315px;
 }
