@@ -4,7 +4,8 @@ const express = require('express')
 const app = express()
 const port = 5000
 const cors = require('cors')
-const uri = "mongodb+srv://brandonbl2021%40gmail.com:Thirstychildren123@cluster0.kdbpr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = process.env.MONGOURI
+
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 //Add route where u add a new user with schema
@@ -12,6 +13,7 @@ app.use(cors())
 app.use(express.json())
 
 app.get('/', (req, res) => {
+
   res.send('Server is running!')
 })
 
