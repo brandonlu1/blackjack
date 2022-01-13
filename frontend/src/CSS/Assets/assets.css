@@ -15,11 +15,36 @@
     cursor: pointer;
 }
 
+.button--form{
+    background-color: #363036; 
+    border: none;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.25rem;
+    width:250px;
+    height:65px;
+    border-radius: 4px;
+    user-select: none;
+    margin-top:24px;
+}
+
+.button--form:hover{
+    cursor: pointer;
+}
+
 .tag{
     color: white;
     text-align: center;
     font-weight: 500;
     font-size: 1.75rem;
+    margin-bottom: 8px;
+}
+
+.form--tag{
+    color: white;
+    font-weight: 500;
+    font-size: 1.5rem;
     margin-bottom: 8px;
 }
 
@@ -40,4 +65,27 @@
     justify-content: center;
 
     background-color: #4E6A54;
+}
+
+input{
+    height: 50px;
+    width:375px;
+    border-style: none;
+    background-color: rgba(196, 196, 196, 0.47);
+    border-radius: 10px;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 1.5rem;
+}
+
+input:focus {
+    border-style:none;
+  }
+
+.subtext {
+    color:rgb(255, 255, 255);
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    margin-top: 8px;
 }
