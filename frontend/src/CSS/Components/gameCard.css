@@ -1,0 +1,16 @@
+.game--card--container{
+    width:200px;
+    height:200px;
+    background-color: #2e2e2e;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    user-select: none;
+    margin-bottom:25px;
+
+}
+.game--card--container:hover{
+    cursor: pointer;
+}

@@ -33,33 +33,36 @@ app.post('/signup', async (req, res)=>{
       res.sendStatus(400)
       console.log(err)
     }
-    else{
-    if (await collection.findOne({username:userDB})){
+    else if (await collection.findOne({username:userDB})){
       res.sendStatus(409)
       console.log("Sorry, there is already an account with that username.")
     }
     else{
     await collection.insertOne(user)
-    console.log("username " + userDB + " has been added.")
+    console.log("user has been added.")
     res.sendStatus(200)
     }
-  }
   })  
 })
 
-app.post('/login',(req,res)=>{
-  const {username: userDB, password: passDB} = req.body
-  client.connect(err => {
+app.post('/login', async (req, res)=>{
+  const {username: userDB, password: passwordDB} = req.body;
+
+  client.connect(async err => {
     const collection = client.db("BlackJack").collection("Users");
-    let user = collection.findOne({username:userDB})
-    if (user !== null && user.password === passDB){
+    if (err){
+      res.sendStatus(400)
+      console.log(err)
+    }
+    let user = await collection.findOne({username: userDB})
+    if (user !== null && user.password === passwordDB){
       res.sendStatus(200)
-      console.log(userDB + "has logged in.")
+      console.log("Logged in!")
     }
     else{
       res.sendStatus(404)
     }
-  })
+  })  
 })
 
 app.listen(port, () => {

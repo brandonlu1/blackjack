@@ -2,19 +2,23 @@ import { useEffect } from 'react';
 import '../CSS/Assets/assets.css';
 import '../CSS/Pages/game.css';
 import {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 export default function Bet(props){
     const [balance, setBalance] = useState(10000)
     const [playerBet, setBet] = useState(0)
-
     const bet = () => {
         if (balance < 100){
-            return;
-        }
+        return
+    }
         setBet(playerBet+100)
         setBalance(balance-100)
     }
+    const navigate = useNavigate()
+    const handleNavigate = () => {
+        navigate("/blackjack")
+    }
+
 
     return(<div className='container'>
         <div className='title'>BETTING</div>
@@ -24,7 +28,7 @@ export default function Bet(props){
             <button className="button--default" onClick={bet}>BET -100</button>
         </div>
         <div className='tag'>BET: {playerBet}</div>
-        <button className="button--default" ><Link to={`/${props.page}`} style={{textDecoration:'none', color:'white', fontWeight:'500'}}>PLAY</Link></button>
+        <button className="button--default" onClick={handleNavigate} >PLAY</button>
 
 
 
