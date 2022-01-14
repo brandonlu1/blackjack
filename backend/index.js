@@ -15,7 +15,6 @@ app.use(cors())
 app.use(express.json())
 
 app.get('/', (req, res) => {
-
   res.send('Server is running!')
 })
 
@@ -47,7 +46,6 @@ app.post('/signup', async (req, res)=>{
 
 app.post('/login', async (req, res)=>{
   const {username: userDB, password: passwordDB} = req.body;
-
   client.connect(async err => {
     const collection = client.db("BlackJack").collection("Users");
     if (err){
@@ -64,6 +62,24 @@ app.post('/login', async (req, res)=>{
     }
   })  
 })
+
+app.get('/leaderboard', async (req, res)=>{
+  client.connect(async err => {
+    const collection = client.db("BlackJack").collection("Users");
+    collection.find({}).toArray((err, result) => {
+			if (err){
+				res.send(err);
+			}
+			else{
+				res.send(result)
+
+			}
+		})
+  
+		})
+})  
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

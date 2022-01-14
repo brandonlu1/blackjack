@@ -1,0 +1,18 @@
+.leaderboard--card--container{
+    width:400px;
+    min-width: none;
+    background-color: #445849;
+    display:flex;
+    justify-content: space-between;
+    padding:25px;
+    border-radius: 8px;
+    margin-bottom:4px;
+}
+
+.leaderboard--card--tag{
+    color:white;
+    font-weight: 500;
+    font-size: 1.5rem;
+    text-align: center;
+    user-select: none;
+  }
