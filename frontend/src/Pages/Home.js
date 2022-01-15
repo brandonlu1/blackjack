@@ -6,8 +6,10 @@ import NavBar from '../Components/NavBar';
 
 const games = [
     {name:"BLACK JACK", to:"/bet"},
-    {name:"BLACK JACK", to:"/bet"},
-    {name:"BLACK JACK", to:"/bet"},
+    {name:"COMING SOON", to:"/"},
+    {name:"COMING SOON", to:"/"},
+    {name:"COMING SOON", to:"/"},
+    {name:"COMING SOON", to:"/"},
 ]
 
 export default function Home(props){

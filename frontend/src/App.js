@@ -10,7 +10,7 @@ import {useState, useEffect, Fragment } from 'react';
  import {BrowserRouter as Router, Route, Routes, Redirect, useNavigate, Navigate} from 'react-router-dom';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState()
+  const [loggedIn, setLoggedIn] = useState(false)
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
@@ -22,7 +22,7 @@ function App() {
 
   return (
     <Router >
-      {!(loggedIn !== null)? 
+      {!(loggedIn !== null) ? 
       <Routes>
         <Route exact path="/signup" element={<Signup/>}/>
         <Route exact path="/login" element={<Login/>}/>

@@ -9,6 +9,7 @@
     align-items:center;
     user-select: none;
     margin-bottom:25px;
+    margin:5px;
 
 }
 .game--card--container:hover{

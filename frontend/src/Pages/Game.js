@@ -20,83 +20,91 @@ export default function Game(){
         .then(res => res.json())
         .then(response => {
             setDeck(response.cards.slice(5))
-
             setDealer(response.cards.slice(0,2))
-            count(response.cards.slice(0)[0].value, "dealer")
+            initializeDealer(response.cards.slice(0,2))
             //Is not adding second card for some reason
-            count(response.cards.slice(1)[0].value, "dealer")
-
-            setPlayer(response.cards.slice(3,4))
-            count(response.cards.slice(2)[0].value,"player")
+            setPlayer(response.cards.slice(2,3))
+            initializePlayer(count(response.cards.slice(2)[0].value))
 
             //Figure out why this isn't working
         })
     },[])
     
-
-    const deal = (e) => {
-        if (e === "player"){
-            setPlayer(player.concat(deck.slice(0,1)))
-        }
-        else{
-            setDealer(player.concat(deck.slice(0,1)))
-        }
-        setDeck(deck.slice(1,deck.length))
-        count(deck.slice(0,1)[0].value,e)
-
+    const initializeDealer = (e) => {
+        let card1 = count(e[0].value)
+        let v = card1[0]
+        let a = card1[1]
+        let card2 = count(e[1].value)
+        v += card2[0]
+        a += card2[1]
+        setDealerAce(a)
+        setDealerValue(v)
     }
 
-    const count = (e, who) => {
-        console.log(e)
-        console.log(who)
+    const initializePlayer = (e) => {
+        //e = value of card
+        let card1 = count(e)
+        let v = card1[0]
+        let a = card1[1]
+        setAce(a)
+        setPlayerValue(v)
+    }
+
+    const deal = (e) => {
+        let card = count(deck.slice(0)[0].value)
+        if (e === "player"){
+            setPlayer(player.concat(deck.slice(0,1)))
+            setPlayerValue(playerValue + card[0])
+            setAce(playerAce + card[1])
+            check(playerValue + card[0])
+        }
+        else{
+            setDealer(dealer.concat(deck.slice(0,1)))
+            setDealerValue(dealerValue + card[0])
+            setDealerAce(dealerAce + card[1])
+            check(dealerValue + card[0])
+        }
+        setDeck(deck.slice(1,deck.length))
+        //Does not take into account the most recent card added
+    }
+
+    const count = (e) => {
         let value = 0
+        let ace = 0
         //console.log(who," received ",e)
         if (e === "KING" || e === "QUEEN" || e === "JACK"){
             value = 10
         }
-        else if (e === "ACE" && who === "player"){
-            setPlayerValue(playerValue + 11)
-            setAce(playerAce + 1)
-            return
-        }
-        else if (e === "ACE" && who === "dealer"){
-            setDealerValue(dealerValue + 11)
-            setDealerAce(dealerAce + 1)
-            return
+        else if (e === "ACE"){
+            value = 11
+            ace = 1
         }
         else{
             value = parseInt(e)
         }
 
-        if (who === "player"){
-             setPlayerValue(playerValue + value)
-        }
-        else{
-            setDealerValue(dealerValue + value)
-        }
-        check()
+        
+        return [value, ace]
     }
 
-    const check = () => {
+    const check = (pvalue) => {
         if (dealerValue > 21 && dealerAce > 0){
             setDealerValue(dealerValue-10)
             setDealerAce(dealerAce-1)
         }
-        if (playerValue > 21 && playerAce > 0){
+        if (pvalue > 21 && playerAce > 0){
             setPlayerValue(playerValue-10)
             setAce(playerAce-1)
         }
-        if (playerValue > 21 && playerAce === 0){
+        if (pvalue > 21 && playerAce === 0){
             setMessage("Sorry, you lost :(")
             setModalOpen(true)
         }
-        console.log("player value: ", playerValue)
-        console.log("DEALER: ", dealerValue)
+        //console.log("CHECK! dealer value: ", dealerValue, ", player value: ", playerValue)
     }
 
-
-
     const play = () => {
+        console.log("CHECK! dealer value: ", dealerValue, ", player value: ", playerValue)
         if (dealerValue < 17){
             deal("dealer")
         }
@@ -126,8 +134,6 @@ export default function Game(){
         <div className='game--cards'>
             {player.map(card => <Card image={card.image} value={card.value}/>)}
         </div>
-        <button className="button--default" onClick={()=>console.log("player: ",playerValue," dealer: ", dealerValue)}>check</button>
-
         <div>
             <button className="button--default" onClick={()=>deal("player")}>HIT</button>
             <button className="button--default" onClick={play}>PLAY</button>

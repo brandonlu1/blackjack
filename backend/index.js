@@ -15,7 +15,15 @@ app.use(cors())
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.send('Server is running!')
+  client.connect(async err => {
+    const collection = client.db("BlackJack").collection("Users");
+    if (err){
+      res.send("Error: ", err)
+    }
+    else{
+      res.send("Connected to MongoDB")
+    }
+  })  
 })
 
 app.post('/signup', async (req, res)=>{
@@ -78,7 +86,6 @@ app.get('/leaderboard', async (req, res)=>{
   
 		})
 })  
-
 
 
 app.listen(port, () => {
