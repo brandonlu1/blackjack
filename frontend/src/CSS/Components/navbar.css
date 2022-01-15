@@ -1,0 +1,34 @@
+.navbar--container{
+    justify-content: space-between;
+    display: flex;
+    width:98vw;
+    min-width:475px;
+}
+
+.navbar{
+    color: white;
+    font-weight: 500;
+    font-size: 3rem;
+}
+.navbar:hover{
+    cursor:pointer;
+}
+
+.navbar--right{
+width:190px;
+display:flex;
+flex-direction: row;
+}
+
+.navbar--tag{
+    font-size: 1.25rem;
+    font-weight: 500;
+    color:white;
+    width:95px;
+    text-align: center;
+    user-select: none;
+}
+
+.navbar--tag:hover{
+    cursor: pointer;
+}

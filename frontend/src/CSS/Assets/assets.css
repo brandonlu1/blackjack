@@ -39,6 +39,7 @@
     font-weight: 500;
     font-size: 1.75rem;
     margin-bottom: 8px;
+    width:90%;
 }
 
 .form--tag{
@@ -53,18 +54,19 @@
     text-align: center;
     font-weight: 500;
     font-size: 2.5rem;
-    margin-bottom: 14px;
+    margin-top:5vh;
+    margin-bottom:2vh;
+    user-select: none;
 }
 
 .container{
     display:flex;
     flex-direction: column;
-    width:100vw;
     min-height:100vh;
     align-items: center;
-    justify-content: center;
-
     background-color: #4E6A54;
+    min-width: 475px;
+    max-width: 100vw;
 }
 
 input{
@@ -89,3 +91,17 @@ input:focus {
     margin-bottom: 12px;
     margin-top: 8px;
 }
+
+.mapping{
+    display:flex;
+    width:630px;
+    flex-wrap: wrap;
+}
+
+
+@media only screen and (max-width: 800px) {
+    .mapping{
+        width: 425px;
+    }
+    
+  }
