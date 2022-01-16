@@ -11,6 +11,7 @@ export default function Game(){
     const [dealerValue, setDealerValue] = useState(0)
     const [playerAce, setAce] = useState(0)
     const [dealerAce, setDealerAce] = useState(0)
+    const [win, setWin] = useState()
     
     const[modalOpen, setModalOpen] = useState(false)
     const [message, setMessage] = useState("")
@@ -98,27 +99,56 @@ export default function Game(){
         }
         if (pvalue > 21 && playerAce === 0){
             setMessage("Sorry, you lost :(")
+            localStorage.removeItem('bet')
             setModalOpen(true)
         }
         //console.log("CHECK! dealer value: ", dealerValue, ", player value: ", playerValue)
     }
 
     const play = () => {
-        console.log("CHECK! dealer value: ", dealerValue, ", player value: ", playerValue)
+        //console.log("CHECK! dealer value: ", dealerValue, ", player value: ", playerValue)
         if (dealerValue < 17){
             deal("dealer")
         }
         if (dealerValue > 21){
             setMessage("Congratulations, you won!")
+            setWin(true)
+            claimBet()
             return
         }
         if (dealerValue >= playerValue){
             setMessage("Sorry, you lost :(")
+            localStorage.removeItem('bet')
          }
         else{
             setMessage("Congratulations, you won!")
+            setWin(true)
+            claimBet()
          }
         setModalOpen(true)
+    }
+
+    const claimBet = () => {
+        const playerBet = parseInt(localStorage.getItem(localStorage.key('bet'))) *(-2)
+        const username = localStorage.getItem("user")
+        fetch('http://localhost:5000/bet', {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username,
+                playerBet
+            })
+        })
+        .then((res)=>{
+            if (res.status === 200){
+                localStorage.removeItem('bet')
+            }
+        })
+        .catch((error)=>{
+            console.log("error: ",error)
+        })
     }
 
     return(

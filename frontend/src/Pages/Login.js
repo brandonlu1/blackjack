@@ -24,7 +24,6 @@ export default function Login(props){
             })
         })
         .then((res)=>{
-            console.log("res", res.status)
             if (res.status === 200){
                 localStorage.setItem('user', username)
                 console.log("Logged in!")
