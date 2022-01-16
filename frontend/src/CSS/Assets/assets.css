@@ -59,6 +59,16 @@
     user-select: none;
 }
 
+.subtitle{
+    color:white;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-bottom:6vh;
+    margin-top:-1vh;
+    user-select: none;
+}
+
 .container{
     display:flex;
     flex-direction: column;

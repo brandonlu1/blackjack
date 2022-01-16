@@ -26,6 +26,7 @@ export default function Login(props){
         .then((res)=>{
             if (res.status === 200){
                 navigate('/')
+                document.location.reload()
                 localStorage.setItem('user', username)
             }
             if (res.status === 404){
