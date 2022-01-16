@@ -43,7 +43,6 @@ export default function Game(){
     }
 
     const initializePlayer = (e) => {
-        //e = value of card
         let card1 = count(e)
         let v = card1[0]
         let a = card1[1]
@@ -66,13 +65,11 @@ export default function Game(){
             check(dealerValue + card[0])
         }
         setDeck(deck.slice(1,deck.length))
-        //Does not take into account the most recent card added
     }
 
     const count = (e) => {
         let value = 0
         let ace = 0
-        //console.log(who," received ",e)
         if (e === "KING" || e === "QUEEN" || e === "JACK"){
             value = 10
         }
@@ -102,11 +99,9 @@ export default function Game(){
             localStorage.removeItem('bet')
             setModalOpen(true)
         }
-        //console.log("CHECK! dealer value: ", dealerValue, ", player value: ", playerValue)
     }
 
     const play = () => {
-        //console.log("CHECK! dealer value: ", dealerValue, ", player value: ", playerValue)
         if (dealerValue < 17){
             deal("dealer")
         }
@@ -159,7 +154,6 @@ export default function Game(){
         <div className='game--cards'>
             {dealer.map(card => <Card image={card.image} value={card.value}/>)}
         </div>
-
         <div className='tag'>PLAYER</div>
         <div className='game--cards'>
             {player.map(card => <Card image={card.image} value={card.value}/>)}
@@ -168,6 +162,5 @@ export default function Game(){
             <button className="button--default" onClick={()=>deal("player")}>HIT</button>
             <button className="button--default" onClick={play}>PLAY</button>
         </div>
-    
     </div>)
 }

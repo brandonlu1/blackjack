@@ -42,14 +42,11 @@ export default function Signup(props){
             .then((res)=>{
                 console.log("res", res.status)
                 if (res.status === 200){
-                    console.log("Signed up!")
-                    setUsernameTaken(false)
                     navigate('/login')
-                    //Send to log in page
+                    setUsernameTaken(false)
                 }
                 if (res.status === 409){
                     setUsernameTaken(true)
-                    console.log("Something went wrong")
                 }
             })
             .catch((error)=>{
@@ -57,7 +54,7 @@ export default function Signup(props){
             })
         }
     }
-
+    
     const navigate = useNavigate();
 
     return(<div className='container'>
@@ -76,9 +73,7 @@ export default function Signup(props){
             <div className='form--tag'>CONFIRM PASSWORD</div>
             <input type="password" onChange={e=>setConfirmPassword(e.target.value)}/>
             <p className='subtext' style={{textAlign:'right', cursor:'pointer'}} onClick={()=>{navigate('/login')}}>Already have an account? Log in</p>
-
         </div>
         <button className='button--form' onClick={createAccount}>Create Account</button>
-       
     </div>)
 }

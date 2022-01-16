@@ -25,10 +25,8 @@ export default function Login(props){
         })
         .then((res)=>{
             if (res.status === 200){
-                localStorage.setItem('user', username)
-                console.log("Logged in!")
                 navigate('/')
-                //Send to log in page
+                localStorage.setItem('user', username)
             }
             if (res.status === 404){
                  console.log("Account not found")

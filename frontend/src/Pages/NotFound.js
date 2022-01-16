@@ -7,6 +7,5 @@ export default function NotFound(props){
     return(<div className='container'>
         <NavBar/>
         <div className='title'>Sorry, we couldn't find that page :(</div>
-
     </div>)
 }
