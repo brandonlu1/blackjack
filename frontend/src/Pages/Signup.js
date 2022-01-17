@@ -30,9 +30,7 @@ export default function Signup(props){
             e.preventDefault();
             fetch('http://localhost:5000/signup',{
                 method:'POST',
-                headers:{
-                    "Content-Type":"application/json",
-                },
+                headers:{ "Content-Type":"application/json",},
                 body:JSON.stringify({
                     username,
                     password,
@@ -45,13 +43,8 @@ export default function Signup(props){
                     navigate('/login')
                     setUsernameTaken(false)
                 }
-                if (res.status === 409){
-                    setUsernameTaken(true)
-                }
-            })
-            .catch((error)=>{
-                console.log("error: ",error)
-            })
+                if (res.status === 409){ setUsernameTaken(true)}})
+            .catch((error)=>{ console.log("error: ",error)})
         }
     }
     

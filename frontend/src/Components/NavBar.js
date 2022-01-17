@@ -7,6 +7,7 @@ export default function NavBar() {
 const logOut = () => {
   localStorage.clear()
   navigate("/login")
+  document.location.reload()
 }
 const toSettings = () => {
   navigate("/settings")

@@ -23,11 +23,8 @@ export default function Game(){
             setDeck(response.cards.slice(5))
             setDealer(response.cards.slice(0,2))
             initializeDealer(response.cards.slice(0,2))
-            //Is not adding second card for some reason
             setPlayer(response.cards.slice(2,3))
             initializePlayer(count(response.cards.slice(2)[0].value))
-
-            //Figure out why this isn't working
         })
     },[])
     
@@ -70,18 +67,12 @@ export default function Game(){
     const count = (e) => {
         let value = 0
         let ace = 0
-        if (e === "KING" || e === "QUEEN" || e === "JACK"){
-            value = 10
-        }
+        if (e === "KING" || e === "QUEEN" || e === "JACK"){ value = 10}
         else if (e === "ACE"){
             value = 11
             ace = 1
         }
-        else{
-            value = parseInt(e)
-        }
-
-        
+        else{ value = parseInt(e) }
         return [value, ace]
     }
 
@@ -128,27 +119,15 @@ export default function Game(){
         const username = localStorage.getItem("user")
         fetch('http://localhost:5000/bet', {
             method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username,
-                playerBet
-            })
-        })
-        .then((res)=>{
-            if (res.status === 200){
-                localStorage.removeItem('bet')
-            }
-        })
-        .catch((error)=>{
-            console.log("error: ",error)
-        })
+            headers: {"Content-Type": "application/json",},
+            body: JSON.stringify({username, playerBet})})
+        .then((res)=>{if (res.status === 200){localStorage.removeItem('bet')}})
+        .catch((error)=>{console.log("error: ",error)})
     }
 
     return(
     <div className='container'>
-        <Modal modalOpen={modalOpen} message = {message}/>
+        <Modal modalOpen={modalOpen} message = {message} player={playerValue} dealer={dealerValue}/>
         <div className='title' style={{marginTop:'2vh'}}>BLACK JACK</div>
         <div className='tag'>DEALER</div>
         <div className='game--cards'>

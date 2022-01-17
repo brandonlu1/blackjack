@@ -8,22 +8,15 @@ export default function Bet(props){
     const [balance, setBalance] = useState(0)
     const [playerBet, setBet] = useState(0)
     const [invalidBet, setInvalidBet] = useState(false)
-    const [username, setUser] = useState(localStorage.getItem(localStorage.key('user')))
+    const [username, setUser] = useState(localStorage.getItem("user"))
 
     useEffect(()=>{
         fetch('http://localhost:5000/getbets', {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username,
-            })
-        })
+            headers: {"Content-Type": "application/json",},
+            body: JSON.stringify({username})})
         .then(res => res.json())
-        .then(response => {
-            setBalance(response.balance)
-         })
+        .then(response => { setBalance(response.balance)})
     },[])
     
     const betPlus = () => {
