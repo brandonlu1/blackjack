@@ -59,7 +59,11 @@ export default function Modal(props) {
         BackdropComponent={Backdrop}
       >
         <Box sx = {style}>
-          <div className="tag">{props.message}</div>
+        <div className="tag">{props.message}</div>
+        <div className="mt2">
+          <div className="t2">Dealer Value: {props.dealer}</div>
+          <div className="t2">Your Value: {props.player}</div>
+        </div>
           <div>
           <button className="button--default" onClick={quit}>Quit</button>
           <button className="button--default" onClick={again}>Play Again</button>

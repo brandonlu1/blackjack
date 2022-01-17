@@ -15,13 +15,8 @@ export default function Login(props){
         e.preventDefault()
         fetch('http://localhost:5000/login', {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username,
-                password
-            })
+            headers: {"Content-Type": "application/json",},
+            body: JSON.stringify({username, password})
         })
         .then((res)=>{
             if (res.status === 200){
@@ -29,18 +24,13 @@ export default function Login(props){
                 document.location.reload()
                 localStorage.setItem('user', username)
             }
-            if (res.status === 404){
-                 console.log("Account not found")
-            }
+            if (res.status === 404){console.log("Account not found")}
         })
-        .catch((error)=>{
-            console.log("error: ",error)
-        })
+        .catch((error)=>{console.log("error: ",error)})
     }
 
     return(<div className='container'>
         <div className='title'>LOG IN</div>
-
         <div className='form--input'>
             <div className='form--tag'>USERNAME</div>
             <input type="text" onChange={e=>setUsername(e.target.value)}/>

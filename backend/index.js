@@ -6,6 +6,7 @@ const port = 5000
 const cors = require('cors');
 const { response } = require('express');
 const { NextWeek } = require('@material-ui/icons');
+const e = require('express');
 const uri = process.env.MONGODB_URI
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -120,6 +121,21 @@ app.put('/bet', async (req, res)=>{
     }
 		})
 })  
+
+app.put('/settings', async (req, res)=>{
+  console.log('---------/settings---------')
+  const {username: userDB, password:passwordDB} = req.body;
+  client.connect(async err => {
+    if (err){
+      res.send(err)
+    }
+    else{
+      res.sendStatus(200)
+      const collection = client.db("BlackJack").collection("Users");
+      collection.updateOne({username:userDB},{$set:{'password':(passwordDB)}})
+      }
+		})
+})
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
